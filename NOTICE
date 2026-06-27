@@ -1,0 +1,10 @@
+Sub-Store Cloudflare is a Cloudflare Worker deployment template inspired by
+Sub-Store.
+
+This repository does not vendor the upstream Sub-Store source by default. Keep
+the original project notices when copying or porting code from:
+
+- https://github.com/sub-store-org/Sub-Store
+
+The Cloudflare Worker code and documentation in this repository are distributed
+under the license in LICENSE. There is no warranty.

@@ -1,0 +1,17 @@
+{
+  "name": "sub-store-cloudflare-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.7.0",
+  "scripts": {
+    "setup": "pnpm --dir cloudflare install",
+    "dev": "pnpm --dir cloudflare run dev",
+    "check": "pnpm --dir cloudflare run check",
+    "deploy:dry-run": "pnpm run check && pnpm --dir cloudflare exec wrangler deploy --dry-run",
+    "deploy": "pnpm --dir cloudflare run deploy",
+    "check:open-source": "node scripts/check-open-source.mjs",
+    "check:history": "node scripts/check-git-history.mjs",
+    "check:release": "pnpm run check && pnpm run check:open-source && pnpm run check:history -- main"
+  },
+  "devDependencies": {}
+}
