@@ -1,6 +1,6 @@
 {
   "name": "sub-store-cloudflare-workspace",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Cloudflare-native subscription aggregation and routing template manager powered by Workers, Static Assets, D1, and Worker Secrets.",
   "homepage": "https://github.com/realchendahuang/sub-store-cloudflare#readme",
   "repository": {
@@ -24,6 +24,9 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@11.7.0",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "setup": "pnpm --dir frontend install && pnpm --dir cloudflare install",
     "dev": "pnpm --dir cloudflare run dev",

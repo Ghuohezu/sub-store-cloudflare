@@ -6,6 +6,7 @@
 [![Forks](https://img.shields.io/github/forks/realchendahuang/sub-store-cloudflare?style=flat)](https://github.com/realchendahuang/sub-store-cloudflare/forks)
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-F38020?logo=cloudflare&logoColor=white)](https://developers.cloudflare.com/workers/)
 [![D1](https://img.shields.io/badge/Storage-D1-F38020?logo=cloudflare&logoColor=white)](https://developers.cloudflare.com/d1/)
+[![Node.js >=22](https://img.shields.io/badge/Node.js-%3E%3D22-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![pnpm](https://img.shields.io/badge/pnpm-11.7.0-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
 
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/realchendahuang/sub-store-cloudflare)
@@ -48,6 +49,8 @@ https://<your-worker>.<your-subdomain>.workers.dev/?token=<admin-token>
 ```
 
 然后在网页里添加订阅源、组合订阅和规则模板。这是最适合普通开源用户的路径。
+
+说明：这是 Cloudflare 官方的模板导入流程。Cloudflare 可能会在你的账号里配置 Workers Builds，用于后续从你自己的副本仓库部署；本上游仓库不使用 GitHub Actions、Dependabot 或 GitHub CI/CD。
 
 ### 方式二：Agent / CLI 一键安装
 
@@ -106,6 +109,8 @@ Cloudflare Worker
 只需要 Cloudflare Workers + D1。KV、R2、Durable Objects、Queue、Cron 都不是核心路径。
 
 ## 本地开发
+
+需要 Node.js 22 和 pnpm 11。仓库带有 `.node-version` 和 `packageManager` 字段。
 
 ```bash
 pnpm run setup
@@ -195,9 +200,10 @@ https://substore.example.com/download/source/<source-id>/sing-box?token=<downloa
 
 ```bash
 pnpm run check:release
+pnpm run deploy:dry-run
 ```
 
-这个命令会检查 Worker、构建前端，并扫描当前文件和 `main` 历史里的常见发布风险。
+这两个命令是本仓库的本地发布 gate：检查 Worker、构建前端、验证 agent seed / deploy config / Worker contract，并扫描当前文件和 `main` 历史里的常见发布风险。仓库不使用 GitHub Actions 或 Dependabot。
 
 ## Star History
 

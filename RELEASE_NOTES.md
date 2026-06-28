@@ -1,15 +1,14 @@
-# v0.1.0
+# v0.1.1
 
-First public release of Sub-Store Cloudflare.
+Open-source polish release for Sub-Store Cloudflare.
 
 ## Highlights
 
-- Cloudflare-native deployment: Workers Static Assets + Worker API + D1 + Worker Secrets.
-- One-click install through the Cloudflare Deploy Button.
-- Agent/CLI install through `pnpm run install:cloudflare`.
-- Source, collection, filter, template, preview, backup/restore, and download workflows.
-- Output targets for Mihomo, Stash, Surge, Surge Mac, Surfboard, Loon, Egern, Shadowrocket, Quantumult X, sing-box, v2ray, URI, and JSON.
-- Release checks and open-source privacy scans.
+- Removes GitHub Actions, Dependabot, issue templates, and pull request template from the upstream repository.
+- Keeps releases gated by local checks: `pnpm run check:release` and `pnpm run deploy:dry-run`.
+- Clarifies the two deployment paths: Cloudflare Deploy Button for quick template import, and `pnpm run install:cloudflare` for local Agent/CLI installs.
+- Updates Worker compatibility dates and documents the Node 22 + pnpm baseline.
+- Keeps the Cloudflare-native architecture: Workers Static Assets + Worker API + D1 + Worker Secrets.
 
 ## Install
 

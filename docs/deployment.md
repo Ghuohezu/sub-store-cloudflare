@@ -39,6 +39,8 @@ https://<worker>.<workers-subdomain>.workers.dev/?token=<admin-token>
 
 按钮部署的定位是“最快跑起来”。它不会读取你的本地 `config/agent-setup.local.json`，也不会把订阅源写进 GitHub。
 
+注意：Cloudflare 官方按钮会把仓库导入到用户自己的 GitHub/GitLab 账号，并可能为这个副本配置 Workers Builds。这个行为属于 Cloudflare 的模板部署体验，不代表本上游仓库使用 GitHub Actions、Dependabot 或 GitHub CI/CD。
+
 ## 2. Agent / CLI 一键安装
 
 本地安装器入口：
@@ -185,6 +187,8 @@ pnpm run deploy:config -- config/agent-setup.local.json cloudflare/wrangler.depl
 
 ## 6. 本地开发
 
+需要 Node.js 22 和 pnpm 11。
+
 ```bash
 cp cloudflare/.dev.vars.example cloudflare/.dev.vars
 pnpm run build:frontend
@@ -249,6 +253,7 @@ https://substore.example.com/api/storage?token=<admin-token>
 
 ```bash
 pnpm run check:release
+pnpm run deploy:dry-run
 ```
 
 它会执行：
@@ -259,3 +264,5 @@ pnpm run check:release
 - Worker contract 检查。
 - 当前文件发布风险扫描。
 - `main` 历史发布风险扫描。
+- Wrangler dry-run 部署检查。
+- 仓库没有 `.github` 自动化文件；发布检查在本地完成。

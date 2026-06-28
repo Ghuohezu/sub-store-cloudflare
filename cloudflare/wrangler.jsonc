@@ -3,7 +3,7 @@
   "name": "sub-store-cloudflare",
   "main": "src/index.ts",
   "workers_dev": true,
-  "compatibility_date": "2026-06-10",
+  "compatibility_date": "2026-06-28",
   "assets": {
     "directory": "../frontend/dist",
     "binding": "ASSETS",

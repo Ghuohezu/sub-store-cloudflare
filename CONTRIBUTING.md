@@ -21,6 +21,8 @@ Do not add R2, KV, Durable Objects, Queues, Cron, file hosting, sync providers, 
 
 ## Development
 
+Requires Node.js 22 and pnpm 11.
+
 ```bash
 pnpm run setup
 cp cloudflare/.dev.vars.example cloudflare/.dev.vars
@@ -73,11 +75,11 @@ These files are local-only and ignored:
 
 ## Pull Requests
 
-Keep PRs focused. Include:
+If you send a patch upstream, keep it focused. Include:
 
 - what changed
 - why it changed
 - how it was tested
 - any product-scope tradeoff
 
-Use draft PRs for work in progress.
+The maintainer does not use GitHub Actions or Dependabot for this repository, so include local command output from `pnpm run check:release` and `pnpm run deploy:dry-run` when the change touches deployment, Worker behavior, or frontend output.

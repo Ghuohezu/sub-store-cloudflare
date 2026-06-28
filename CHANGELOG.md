@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 This project follows semantic versioning where practical.
 
+## [0.1.1] - 2026-06-28
+
+### Changed
+
+- Removed repository GitHub Actions, Dependabot, issue templates, and pull request template so the upstream project does not depend on GitHub automation.
+- Clarified that the Cloudflare Deploy Button is the Cloudflare-hosted template import path, while `pnpm run install:cloudflare` is the local Agent/CLI deployment path.
+- Updated Worker compatibility dates and documented the Node 22 + pnpm local development baseline.
+
+### Verification
+
+- Local release checks and Wrangler dry-run deployment remain the release gate.
+
 ## [0.1.0] - 2026-06-28
 
 ### Added
@@ -21,4 +33,4 @@ This project follows semantic versioning where practical.
 ### Documentation
 
 - Added deployment, AI agent install, architecture, and product-scope documentation.
-- Added contributing, support, security, code of conduct, issue templates, pull request template, and CI workflow.
+- Added contributing, support, security, code of conduct, release notes, and local release checks.

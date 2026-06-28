@@ -2,11 +2,14 @@
 
 Use this checklist before publishing a release.
 
+This repository does not use GitHub Actions, Dependabot, or release automation.
+Run the release checks locally, commit directly to `main`, tag the release, then create the GitHub Release.
+
 ## 1. Verify
 
 ```bash
 git status --short
-pnpm run release:prepare -- v0.1.0
+pnpm run release:prepare -- v0.1.1
 pnpm run check:release
 pnpm run deploy:dry-run
 ```
@@ -27,21 +30,20 @@ Update:
 - `package.json`
 - `cloudflare/package.json`
 - `CHANGELOG.md`
-
-For the first public release this is `0.1.0`.
+- `RELEASE_NOTES.md`
 
 ## 3. Tag
 
 ```bash
-git tag -a v0.1.0 -m "v0.1.0"
+git tag -a v0.1.1 -m "v0.1.1"
 git push origin main --tags
 ```
 
 ## 4. Create GitHub Release
 
 ```bash
-gh release create v0.1.0 \
-  --title "v0.1.0" \
+gh release create v0.1.1 \
+  --title "v0.1.1" \
   --notes-file RELEASE_NOTES.md
 ```
 

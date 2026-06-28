@@ -6,6 +6,7 @@
 [![Forks](https://img.shields.io/github/forks/realchendahuang/sub-store-cloudflare?style=flat)](https://github.com/realchendahuang/sub-store-cloudflare/forks)
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-F38020?logo=cloudflare&logoColor=white)](https://developers.cloudflare.com/workers/)
 [![D1](https://img.shields.io/badge/Storage-D1-F38020?logo=cloudflare&logoColor=white)](https://developers.cloudflare.com/d1/)
+[![Node.js >=22](https://img.shields.io/badge/Node.js-%3E%3D22-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![pnpm](https://img.shields.io/badge/pnpm-11.7.0-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
 
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/realchendahuang/sub-store-cloudflare)
@@ -49,6 +50,8 @@ https://<your-worker>.<your-subdomain>.workers.dev/?token=<admin-token>
 
 Then add sources, collections, filters, and templates in the web UI.
 
+Note: this is Cloudflare's hosted template import flow. Cloudflare may configure Workers Builds inside your copied repository for future deployments. This upstream repository does not use GitHub Actions, Dependabot, or GitHub CI/CD.
+
 ### Agent / CLI Install
 
 For local agent-assisted installs with seeded sources and collections:
@@ -83,6 +86,8 @@ The deployment model is intentionally small: Workers Static Assets + Worker API 
 
 ## Local Development
 
+Requires Node.js 22 and pnpm 11. This repository includes `.node-version` and a `packageManager` field.
+
 ```bash
 pnpm run setup
 cp cloudflare/.dev.vars.example cloudflare/.dev.vars
@@ -111,6 +116,15 @@ pnpm run deploy:local
 ```
 
 See [docs/deployment.md](docs/deployment.md) and [docs/ai-agent-install.md](docs/ai-agent-install.md).
+
+## Release Checks
+
+```bash
+pnpm run check:release
+pnpm run deploy:dry-run
+```
+
+These local commands are the release gate. The upstream repository intentionally does not use GitHub Actions or Dependabot.
 
 ## Acknowledgements
 
