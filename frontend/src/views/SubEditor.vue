@@ -221,7 +221,6 @@
             <button class="cimg-button" @click="isDis = false">
               <font-awesome-icon icon="fa-solid fa-maximize" />
               {{ $t(`editorPage.subConfig.basic.url.tips.fullScreenEdit`) }}
-              <!-- 测试 后续再改效果 -->
             </button>
             <input type="file" ref="fileInput" @change="fileChange" style="display: none">
             <button class="cimg-button" @click="upload">

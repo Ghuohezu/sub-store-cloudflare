@@ -84,7 +84,7 @@
         "template": { "type": "string" },
         "mode": { "enum": ["add", "remove"] },
         "tw": { "enum": ["cn", "ws", "tw"] },
-        "provider": { "enum": ["Google", "IP-API", "Cloudflare", "Ali", "Tencent", "Custom"] },
+        "provider": { "enum": ["Google", "Cloudflare", "Ali", "Tencent", "Custom"] },
         "recordType": { "enum": ["A", "AAAA"] },
         "filter": { "enum": ["disabled", "removeFailed", "IPOnly", "IPv4Only", "IPv6Only"] },
         "url": { "type": "string" },

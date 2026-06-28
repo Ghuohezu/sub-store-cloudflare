@@ -16,6 +16,7 @@ const BUILTIN_TEMPLATE_IDS = new Set([
 ]);
 const SUPPORTED_TARGETS = new Set(["mihomo", "stash", "surge", "surge-mac", "surfboard", "loon", "egern", "shadowrocket", "qx", "sing-box", "v2ray", "uri", "json"]);
 const SUPPORTED_TEMPLATE_TARGETS = new Set(["mihomo", "stash", "surge-mac"]);
+const SUPPORTED_RESOLVE_PROVIDERS = new Set(["Google", "Cloudflare", "Ali", "Tencent", "Custom"]);
 
 const errors = [];
 const warnings = [];
@@ -183,7 +184,7 @@ function validateFilters(filters, label) {
       errors.push(`${label}[${index}].mode must be add or remove`);
     }
     if (filter.type === "resolve") {
-      if (filter.provider && !["Google", "IP-API", "Cloudflare", "Ali", "Tencent", "Custom"].includes(filter.provider)) {
+      if (filter.provider && !SUPPORTED_RESOLVE_PROVIDERS.has(filter.provider)) {
         errors.push(`${label}[${index}].provider contains unsupported resolver: ${filter.provider}`);
       }
       if (filter.recordType && !["A", "AAAA"].includes(filter.recordType)) {
