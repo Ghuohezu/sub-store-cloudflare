@@ -96,7 +96,9 @@ async function loadProxyNodes(options: BuildOptions) {
 
   const tasks = sources.map((sub) => async () => applyFilters(parseProxies(await loadSubscriptionRaw(sub, options.settings)), getFilters(sub)));
   const proxyLists = options.collection?.ignoreFailed
-    ? (await Promise.allSettled(tasks.map((task) => task()))).flatMap((result) => (result.status === "fulfilled" ? [result.value] : []))
+    ? (await runSettledWithConcurrency(tasks, getRequestConcurrency(options.settings), getRequestConcurrencyWait(options.settings))).flatMap((result) =>
+        result.status === "fulfilled" ? [result.value] : [],
+      )
     : await runWithConcurrency(tasks, getRequestConcurrency(options.settings), getRequestConcurrencyWait(options.settings));
 
   return ensureUniqueProxyNames(applyFilters(proxyLists.flat(), getFilters(options.collection)));
@@ -189,6 +191,19 @@ async function runWithConcurrency<T>(tasks: Array<() => Promise<T>>, concurrency
   }
 
   await Promise.all(Array.from({ length: Math.min(concurrency, tasks.length) }, worker));
+  return results;
+}
+
+async function runSettledWithConcurrency<T>(tasks: Array<() => Promise<T>>, concurrency: number, waitMs = 0) {
+  const results = new Array<PromiseSettledResult<T>>(tasks.length);
+  const wrapped = tasks.map((task, index) => async () => {
+    try {
+      results[index] = { status: "fulfilled", value: await task() };
+    } catch (reason) {
+      results[index] = { status: "rejected", reason };
+    }
+  });
+  await runWithConcurrency(wrapped, concurrency, waitMs);
   return results;
 }
 

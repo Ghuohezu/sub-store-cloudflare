@@ -199,7 +199,7 @@ apiRoutes.get("/link/collection/:name", async (c) => {
 apiRoutes.get("/source/flow/:name", async (c) => {
   const sub = await getSource(c.env, c.req.param("name"));
   if (!sub) return flowFailed(c, "Source not found", 404);
-  const parsed = parseFlowRequest(toApiSource(sub));
+  const parsed = parseFlowRequest(toApiSource(sub), await getSettings(c.env));
   if (!parsed) return flowFailed(c, "No flow info");
 
   try {
@@ -448,14 +448,14 @@ function flowFailed(c: ApiContext, message: string, status = 400) {
   return c.json({ status: "failed", error: { code: "NO_FLOW_INFO", type: "NO_FLOW_INFO", message } }, status as 400);
 }
 
-function parseFlowRequest(sub: JsonMap): FlowRequest | undefined {
+function parseFlowRequest(sub: JsonMap, settings: JsonMap = {}): FlowRequest | undefined {
   const rawUrl = stringValue(sub.url);
   const args = parseUrlArguments(rawUrl);
   const flowUrl = stringValue(args.flowUrl) || rawUrl.split("#")[0];
   if (args.noFlow || !/^https?:\/\//i.test(flowUrl)) return undefined;
   return {
     url: flowUrl,
-    userAgent: stringValue(args.flowUserAgent) || "clash.meta/v1.19.24",
+    userAgent: stringValue(args.flowUserAgent) || stringValue(settings.defaultFlowUserAgent) || stringValue(settings.defaultUserAgent) || "clash.meta/v1.19.24",
     headers: parseJsonHeaders(args.flowHeaders),
   };
 }
