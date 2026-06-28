@@ -13,8 +13,6 @@ interface SettingsBase {
 }
 
 interface SettingsPostData {
-  githubProxy?: string;
-  githubProxyRegex?: string;
   defaultUserAgent?: string;
   defaultFlowUserAgent?: string;
   defaultTimeout?: string;

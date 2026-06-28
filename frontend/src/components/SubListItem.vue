@@ -34,13 +34,13 @@
             <nut-avatar
               v-if="props[props.type].icon"
               :size="avatarSize"
-              :url="rewriteGithubUrl(props[props.type].icon)"
+              :url="props[props.type].icon"
               bg-color=""
             />
             <nut-avatar
               v-else
               :size="avatarSize"
-              :url="rewriteGithubUrl(icon)"
+              :url="icon"
               bg-color=""
             />
           </div>
@@ -48,7 +48,7 @@
             <nut-avatar
               class="sub-item-customer-icon"
               :size="avatarSize"
-              :url="rewriteGithubUrl(props[props.type].icon || icon)"
+              :url="props[props.type].icon || icon"
               bg-color=""
             />
           </div>
@@ -388,7 +388,6 @@ import { useGlobalStore } from "@/store/global";
 import { useSettingsStore } from "@/store/settings";
 import { useSubsStore } from "@/store/subs";
 import { getString } from "@/utils/flowTransfer";
-import { createGithubProxyUrlRewriter } from "@/utils/githubProxy";
 import { isMobile } from "@/utils/isMobile";
 import CompareTable from "@/views/CompareTable.vue";
 
@@ -420,7 +419,7 @@ const globalStore = useGlobalStore();
 const subsStore = useSubsStore();
 const cloudflareApi = useCloudflareApi();
 const settingsStore = useSettingsStore();
-const { appearanceSetting, githubProxy, githubProxyRegex } = storeToRefs(settingsStore);
+const { appearanceSetting } = storeToRefs(settingsStore);
 
 const {
   isFlowFetching,
@@ -478,12 +477,6 @@ const imageMarginTop = computed(() => {
   if (appearanceSetting.value.isSimpleMode) return "5px";
   return props.isDualColumn ? "2px" : "0";
 });
-const githubUrlRewriter = computed(() => {
-  return createGithubProxyUrlRewriter(githubProxy.value, githubProxyRegex.value);
-});
-const rewriteGithubUrl = (url?: string | null) => {
-  return githubUrlRewriter.value(url);
-};
 
 const isIconColor = computed(() => {
   return props[props.type].isIconColor !== false;

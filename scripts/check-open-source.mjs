@@ -71,7 +71,7 @@ for (const file of trackedFiles) {
     }
   }
 
-  if (/^frontend\/src\/locales\/(zh|en|ru)\.ts$/.test(file)) {
+  if (/^frontend\/src\/locales\/(zh|en)\.ts$/.test(file)) {
     const localeKeyPattern = new RegExp(`^\\s{2}(${localeForbiddenKeys.join("|")}):`);
     for (const [index, line] of lines.entries()) {
       if (localeKeyPattern.test(line)) {

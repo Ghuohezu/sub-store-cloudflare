@@ -772,30 +772,5 @@ export default {
     cleared: "Cleared",
     pastedLength: "Pasted characters: {count}",
     clipboardFailed: "Failed to read clipboard: available on localhost/HTTPS or after granting permission"
-  },
-  iconCollectionPage: {
-    iconCollection: "Icon Collection",
-    iconCollectionPlaceholder: "Please input icon collection url",
-    iconName: "Icon Name",
-    iconNamePlaceholder: "Please input icon name",
-    errorIconCollectionUrlTips: "Please enter correct url",
-    copySuccessTips: "The icon url has been copied",
-    loadingTitle: "Loading icons",
-    loadingDesc: "Fetching the icon collection for the first open.",
-    emptyCollectionTitle: "No icon data yet",
-    emptyCollectionDesc: "Please manually refresh or select a different icon collection",
-    loadFailedTitle: "Failed to load icons",
-    loadFailedDesc: "Check the network, proxy, or collection URL and try again.",
-    refreshBtn: "Manual refresh",
-    retryBtn: "Retry",
-    selectCollectionBtn: "Select a icon collection",
-    more: "More",
-    useCustomIconCollection: "Use Custom Icon Collection",
-    resetDefaultIconCollection: "Reset Default",
-    collectionPicker: {
-      title: "Select a icon collection",
-      cancel: "Cancel",
-      confirm: "Confirm"
-    }
   }
 };

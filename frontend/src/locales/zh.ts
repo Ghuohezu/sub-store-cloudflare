@@ -772,30 +772,5 @@ export default {
     cleared: "已清空",
     pastedLength: "已粘贴字数: {count}",
     clipboardFailed: "获取剪贴板失败: 本地/HTTPS 环境下可用(或手动配置权限)"
-  },
-  iconCollectionPage: {
-    iconCollection: "图标仓库",
-    iconCollectionPlaceholder: "请输入图标仓库地址",
-    iconName: "图标名称",
-    iconNamePlaceholder: "请输入图标名称",
-    errorIconCollectionUrlTips: "请输入正确的图标仓库地址",
-    copySuccessTips: "已复制图标地址",
-    loadingTitle: "图标加载中",
-    loadingDesc: "首次打开会请求图标仓库，请稍候片刻",
-    emptyCollectionTitle: "暂无图标数据",
-    emptyCollectionDesc: "请手动刷新或选择其他图标仓库",
-    loadFailedTitle: "图标加载失败",
-    loadFailedDesc: "请检查网络、代理或仓库地址后重试",
-    refreshBtn: "手动刷新",
-    retryBtn: "重试加载",
-    selectCollectionBtn: "切换图标仓库",
-    more: "更多",
-    useCustomIconCollection: "使用自定义仓库",
-    resetDefaultIconCollection: "恢复默认",
-    collectionPicker: {
-      title: "选择一个图标仓库",
-      cancel: "取消",
-      confirm: "确定"
-    }
   }
 };

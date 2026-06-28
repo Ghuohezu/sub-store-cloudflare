@@ -36,7 +36,6 @@
           :src="subIcon"
           fit="cover"
           show-loading
-          @click="showIconPopup"
         />
       </div>
       <!-- <div class="sticky-title-wrapper">
@@ -132,8 +131,6 @@
               :placeholder="$t(`editorPage.subConfig.basic.icon.placeholder`)"
               type="text"
               input-align="right"
-              left-icon="shop"
-              @click-left-icon="showIconPopup"
             />
         </nut-form-item>
         <!-- isIconColor -->
@@ -412,7 +409,7 @@
                         :class="{ 'sub-item-customer-icon': !element[4], 'icon': true  }"
                         v-if="element[2]"
                         :size="chooserAvatarSize"
-                        :url="rewriteGithubUrl(element[2])"
+                        :url="element[2]"
                         bg-color=""
                       ></nut-avatar>
                       <span class="sub-item">
@@ -517,10 +514,6 @@
     @closeCompare="closeCompare"
     @refresh="refreshCompare"
   />
-  <icon-popup
-    v-model:visible="iconPopupVisible"
-    @setIcon="setIcon">
-  </icon-popup>
   <DesktopPicker
     v-model="selectedSubFailureMode"
     v-model:visible="showSubFailureModePicker"
@@ -581,7 +574,6 @@ import FilterSelect from "@/views/editor/components/FilterSelect.vue";
 import HandleDuplicate from "@/views/editor/components/HandleDuplicate.vue";
 import Regex from "@/views/editor/components/Regex.vue";
 import Sort from "@/views/editor/components/Sort.vue";
-import IconPopup from "@/views/icon/IconPopup.vue";
 import TagPopup from "@/components/TagPopup.vue";
 import DesktopPicker from "@/components/DesktopPicker.vue";
 import EditorGroupingTips from "@/components/EditorGroupingTips.vue";
@@ -601,7 +593,6 @@ import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import cmView from "@/views/editCode/cmView.vue";
 import { useCodeStore } from "@/store/codeStore";
-import { createGithubProxyUrlRewriter } from "@/utils/githubProxy";
 const cmStore = useCodeStore();
 const isDis = ref(true)
 const { t, locale } = useI18n();
@@ -619,7 +610,7 @@ const { showNotify } = useAppNotifyStore();
 const globalStore = useGlobalStore();
 const systemStore = useSystemStore();
 const settingsStore = useSettingsStore();
-const { appearanceSetting, githubProxy, githubProxyRegex } = storeToRefs(settingsStore);
+const { appearanceSetting } = storeToRefs(settingsStore);
 const { navBarHeight } = storeToRefs(systemStore);
 
 const {
@@ -629,12 +620,6 @@ const {
     // isIconColor 
   } = storeToRefs(globalStore);
 const padding = bottomSafeArea.value + "px";
-const githubUrlRewriter = computed(() => {
-  return createGithubProxyUrlRewriter(githubProxy.value, githubProxyRegex.value);
-});
-const rewriteGithubUrl = (url?: string | null) => {
-  return githubUrlRewriter.value(url);
-};
 const routeConfigName = computed(() => route.params.id as string);
 const isEditMode = computed(() => routeConfigName.value !== "UNTITLED");
 const editorGroupingMode = computed<EditorGroupingMode>(() => appearanceSetting.value.editorGroupingMode || "edit-only");
@@ -1486,18 +1471,11 @@ const urlValidator = (val: string): Promise<boolean> => {
   // 图标
   const subIcon = computed(() => {
     if (form.icon) {
-      return rewriteGithubUrl(form.icon)
+      return form.icon
     } else {
-      return rewriteGithubUrl(appearanceSetting.value.isDefaultIcon ? logoIcon : logoRedIcon)
+      return appearanceSetting.value.isDefaultIcon ? logoIcon : logoRedIcon
     }
   })
-  const iconPopupVisible = ref(false)
-  const showIconPopup = () => {
-    iconPopupVisible.value = true
-  }
-  const setIcon = (icon: any) => {
-    form.icon = icon.url
-  }
   const uaTips = () => {
     Dialog({
         title: t("editorPage.subConfig.basic.ua.tips.title"),

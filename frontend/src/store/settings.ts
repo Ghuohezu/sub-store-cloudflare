@@ -87,8 +87,6 @@ const normalizeEditorGroupingMode = (
 export const useSettingsStore = defineStore("settingsStore", {
   state: (): SettingsStoreState => {
     return {
-      githubProxy: "",
-      githubProxyRegex: "",
       defaultUserAgent: "",
       defaultFlowUserAgent: "",
       defaultTimeout: "",
@@ -176,8 +174,6 @@ export const useSettingsStore = defineStore("settingsStore", {
       const { showNotify } = useAppNotifyStore();
       const res = await runFrontendRequestTask(() => settingsApi.getSettings(), "settings.getSettings");
       if (res?.data?.status === "success" && res?.data?.data) {
-        this.githubProxy = res.data.data.githubProxy || "";
-        this.githubProxyRegex = res.data.data.githubProxyRegex || "";
         this.defaultUserAgent = res.data.data.defaultUserAgent || "";
         this.defaultFlowUserAgent = res.data.data.defaultFlowUserAgent || "";
         this.defaultTimeout = res.data.data.defaultTimeout || "";
@@ -205,8 +201,6 @@ export const useSettingsStore = defineStore("settingsStore", {
       const { showNotify } = useAppNotifyStore();
       const res = await settingsApi.setSettings(data);
       if (res?.data?.status === "success" && res?.data?.data) {
-        this.githubProxy = res.data.data.githubProxy || "";
-        this.githubProxyRegex = res.data.data.githubProxyRegex || "";
         this.defaultUserAgent = res.data.data.defaultUserAgent || "";
         this.defaultFlowUserAgent = res.data.data.defaultFlowUserAgent || "";
         this.defaultTimeout = res.data.data.defaultTimeout || "";
