@@ -7,7 +7,7 @@
   "scripts": {
     "setup": "pnpm --dir frontend install && pnpm --dir cloudflare install",
     "dev": "pnpm --dir cloudflare run dev",
-    "build:frontend": "VITE_API_URL=/ VITE_DISABLE_PWA=true pnpm --dir frontend run build",
+    "build:frontend": "VITE_API_URL=/ pnpm --dir frontend run build",
     "deploy:config": "node scripts/render-wrangler-config.mjs",
     "check:worker": "pnpm --dir cloudflare run check",
     "check:frontend": "pnpm --dir frontend run check:locales && pnpm run build:frontend",

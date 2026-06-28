@@ -8,7 +8,7 @@ The production build is generated into `frontend/dist` and served by the Worker 
 
 ```bash
 pnpm --dir frontend install
-VITE_API_URL=/ VITE_DISABLE_PWA=true pnpm --dir frontend run build
+VITE_API_URL=/ pnpm --dir frontend run build
 ```
 
 For full local development, build the frontend and run the Worker from the repository root:

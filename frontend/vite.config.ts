@@ -6,7 +6,6 @@ import { ConfigEnv, defineConfig, loadEnv } from "vite";
 import { createStyleImportPlugin } from "vite-plugin-style-import";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import viteCompression from "vite-plugin-compression";
-import { VitePWA } from "vite-plugin-pwa";
 
 const projectRoot = dirname(fileURLToPath(import.meta.url));
 const version = JSON.parse(
@@ -29,7 +28,6 @@ const htmlPlugin = () => {
 
 const viteConfig = defineConfig((mode: ConfigEnv) => {
   const env = loadEnv(mode.mode, projectRoot);
-  const enablePWA = env.VITE_DISABLE_PWA !== "true";
 
   return {
     plugins: [
@@ -62,92 +60,6 @@ const viteConfig = defineConfig((mode: ConfigEnv) => {
         threshold: 10240,
         // algorithm: 'gzip',
         // ext: '.gz'
-      }),
-      enablePWA && VitePWA({
-        srcDir: "src",
-        outDir: "dist",
-        strategies: "generateSW",
-        registerType: "autoUpdate",
-        // minify: true,
-        // includeAssets: ['favicon.svg'],
-        manifest: {
-          name: "Sub Store",
-          short_name: "Sub Store",
-          description: "Cloud-side subscription aggregation and routing templates",
-          id: "/",
-          start_url: "/",
-          scope: "/",
-          lang: "en",
-          display: "standalone",
-          icons: [
-            {
-              src: "144x144.png",
-              sizes: "144x144",
-              type: "image/png",
-            },
-            {
-              src: "168x168.png",
-              sizes: "168x168",
-              type: "image/png",
-            },
-            {
-              src: "192x192.png",
-              sizes: "192x192",
-              type: "image/png",
-            },
-            {
-              src: "256x256.png",
-              sizes: "256x256",
-              type: "image/png",
-            },
-            {
-              src: "512x512.png",
-              sizes: "512x512",
-              type: "image/png",
-              purpose: "any",
-            },
-          ],
-        },
-        workbox: {
-          maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
-          navigateFallbackDenylist: [/(^|\/.+)\/(api|download)\/.+/],
-          // globPatterns: ['**/*.{css,js,gz,eot,html,svg,png,ico,ttf,woff2}'],
-          runtimeCaching: [
-            {
-              urlPattern: /(^|\/.+)\/(api|download)\/.+/,
-              handler: "NetworkOnly",
-            },
-            {
-              urlPattern: /.*\.(?:js|css|gz|html|json)/i, // json
-              handler: "CacheFirst",
-              options: {
-                cacheName: "sub-store-js-cache",
-                expiration: {
-                  maxEntries: 30,
-                  maxAgeSeconds: 60 * 60 * 24 * 30,
-                },
-                cacheableResponse: {
-                  statuses: [200],
-                },
-              },
-            },
-            {
-              urlPattern: /https:\/\/avatars\.githubusercontent\.com\/u\/\d+(?:\?.*)?$|.*\.(?:png|svg|ico|jpe?g|webp|avif|gif|woff2?|ttf|eot|otf)(?:\?.*)?$/i,
-              handler: "CacheFirst",
-              options: {
-                cacheName: "sub-store-res-cache",
-                expiration: {
-                  maxEntries: 300,
-                  maxAgeSeconds: 60 * 60 * 24 * 365,
-                },
-                cacheableResponse: {
-                  statuses: [0, 200],
-                },
-              },
-            },
-          ],
-        },
-        selfDestroying: false,
       }),
     ],
     root: projectRoot,
