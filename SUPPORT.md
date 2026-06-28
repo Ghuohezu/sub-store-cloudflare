@@ -17,3 +17,5 @@ For deployment problems, include:
 - output target such as `mihomo`, `sing-box`, `surge`, `uri`, or `json`
 
 Do not include subscription URLs, node URIs, admin tokens, download tokens, private database IDs, or generated seed SQL.
+
+Common deployment and download-link problems are covered in [docs/troubleshooting.md](docs/troubleshooting.md).

@@ -30,6 +30,7 @@ pnpm run deploy:dry-run
 - Local Wrangler deploy config rendering.
 - Worker contract checks.
 - Module format checks.
+- Documentation link checks.
 - Current-file open-source hygiene scan.
 - `main` git history privacy scan.
 
@@ -42,6 +43,7 @@ pnpm run check:worker
 pnpm run check:frontend
 pnpm run check:agent
 pnpm run check:worker-contract
+pnpm run check:docs
 pnpm run check:open-source
 pnpm run check:history -- main
 ```

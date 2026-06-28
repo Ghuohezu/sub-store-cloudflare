@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 This project follows semantic versioning where practical.
 
+## [Unreleased]
+
+### Added
+
+- Added governance, maintainer, roadmap, troubleshooting, and language policy documentation.
+- Added local documentation link checking via `pnpm run check:docs`.
+
 ## [0.1.1] - 2026-06-28
 
 ### Changed
