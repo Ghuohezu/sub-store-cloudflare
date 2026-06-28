@@ -11,7 +11,7 @@ Chinese is the primary documentation language for this repository. See [README.m
 - Filters by region, type, and regex; renames, deletes matched name text, deduplicates, regex-sorts, adds/removes flags, and applies common node options.
 - Provides built-in Mihomo routing templates and supports custom JSON/YAML templates.
 - Previews original and processed node lists in the admin UI, with local node validation.
-- Supports subscription usage info, config backup/restore, and request options such as User-Agent, timeout, and remote fetch concurrency.
+- Supports subscription usage info, config backup/restore, and request options such as User-Agent, pass-through User-Agent, timeout, and remote fetch concurrency.
 - Supports temporary `url`, `content`, and `ua` download parameters for one-off conversion through an existing source or collection profile.
 - Outputs Mihomo, sing-box, v2ray, URI, and JSON.
 - Uses Worker Secrets for admin and download tokens.
@@ -100,7 +100,7 @@ https://substore.example.com/download/source/<source-id>/mihomo?token=<download-
 https://substore.example.com/download/source/<source-id>/sing-box?token=<download-token>&content=<url-encoded-node-text>
 ```
 
-`url` temporarily replaces the remote subscription URL, `content` is parsed as local node text, and `ua` temporarily overrides the User-Agent for fetching a remote subscription. These parameters affect only the current request.
+`url` temporarily replaces the remote subscription URL, `content` is parsed as local node text, and `ua` temporarily overrides the User-Agent for fetching a remote subscription. These parameters affect only the current request. When a source enables pass-through User-Agent, the Worker forwards the subscription client's User-Agent while fetching the remote subscription.
 
 ## Acknowledgements
 

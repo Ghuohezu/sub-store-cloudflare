@@ -17,7 +17,7 @@ English: [README.en.md](README.en.md)
 - 对节点做区域/类型/正则过滤、重命名、正则删除、去重、正则排序、旗帜处理和常用属性设置。
 - 内置常用 Mihomo 分流模板，也支持导入自己的 JSON/YAML 模板。
 - 在网页里预览处理前后的节点列表，并校验本地节点内容。
-- 支持订阅流量信息、配置备份/恢复、远程订阅请求超时、User-Agent 和并发参数。
+- 支持订阅流量信息、配置备份/恢复、远程订阅请求超时、User-Agent、透传 User-Agent 和并发参数。
 - 下载链接支持临时传入 `url`、`content` 和 `ua`，可以复用已有过滤器和模板做一次性格式转换。
 - 输出 Mihomo、sing-box、v2ray、URI 和 JSON。
 - 使用 Worker Secrets 保护管理端和下载链接。
@@ -160,7 +160,7 @@ https://substore.example.com/download/source/<source-id>/mihomo?token=<download-
 https://substore.example.com/download/source/<source-id>/sing-box?token=<download-token>&content=<url-encoded-node-text>
 ```
 
-`url` 会临时替换该订阅源的远程订阅地址，`content` 会临时按本地节点文本解析，`ua` 会临时覆盖拉取远程订阅时使用的 User-Agent。临时参数只影响本次请求，不会写入 D1。
+`url` 会临时替换该订阅源的远程订阅地址，`content` 会临时按本地节点文本解析，`ua` 会临时覆盖拉取远程订阅时使用的 User-Agent。临时参数只影响本次请求，不会写入 D1。订阅源开启「透传 User-Agent」时，Worker 会把订阅客户端请求下载链接时的 User-Agent 继续用于拉取远程订阅。
 
 如果配置了独立下载域名，把它写入 `SUB_STORE_PUBLIC_DOWNLOAD_HOSTS`。该域名只开放 `/download/*`。
 

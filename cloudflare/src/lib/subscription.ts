@@ -30,6 +30,7 @@ type BuildOptions = {
   target: SubscriptionTarget;
   template?: RoutingTemplate;
   settings?: AppSettings;
+  requestUserAgent?: string;
 };
 
 const TEST_URL = "https://www.gstatic.com/generate_204";
@@ -64,14 +65,14 @@ export async function buildSubscription(options: BuildOptions) {
   return renderMihomoYaml(proxies, options.requestUrl, options.template?.config);
 }
 
-export async function previewSubscription(options: Pick<BuildOptions, "source" | "collection" | "sources" | "settings">) {
+export async function previewSubscription(options: Pick<BuildOptions, "source" | "collection" | "sources" | "settings" | "requestUserAgent">) {
   const sources = getSources({
     ...options,
     requestUrl: new URL("https://sub-store.local/preview"),
     target: "json",
   });
   const originalLists = await runWithConcurrency(
-    sources.map((sub) => async () => parseProxies(await loadSubscriptionRaw(sub, options.settings))),
+    sources.map((sub) => async () => parseProxies(await loadSubscriptionRaw(sub, options.settings, options.requestUserAgent))),
     getRequestConcurrency(options.settings),
     getRequestConcurrencyWait(options.settings),
   );
@@ -104,7 +105,7 @@ async function loadProxyNodes(options: BuildOptions) {
   const sources = getSources(options).filter((sub) => sub.enabled !== false);
   if (sources.length === 0) return [];
 
-  const tasks = sources.map((sub) => async () => applyFilters(parseProxies(await loadSubscriptionRaw(sub, options.settings)), getFilters(sub)));
+  const tasks = sources.map((sub) => async () => applyFilters(parseProxies(await loadSubscriptionRaw(sub, options.settings, options.requestUserAgent)), getFilters(sub)));
   const proxyLists = options.collection?.ignoreFailed
     ? (await runSettledWithConcurrency(tasks, getRequestConcurrency(options.settings), getRequestConcurrencyWait(options.settings))).flatMap((result) =>
         result.status === "fulfilled" ? [result.value] : [],
@@ -129,14 +130,14 @@ function getFilters(input: SubscriptionSource | SubscriptionCollection | undefin
   return Array.isArray(filters) ? (filters as FilterRule[]) : [];
 }
 
-async function loadSubscriptionRaw(sub: SubscriptionSource, settings?: AppSettings) {
+async function loadSubscriptionRaw(sub: SubscriptionSource, settings?: AppSettings, requestUserAgent?: string) {
   if (sub.type === "local" || sub.content) return String(sub.content || sub.url || "");
 
   const urls = splitSourceUrls(sub.url);
   if (urls.length === 0) throw new Error(`Remote source ${sub.name} has no valid URL`);
 
   const contents = await runWithConcurrency(
-    urls.map((url) => async () => fetchSubscriptionUrl(url, sub, settings)),
+    urls.map((url) => async () => fetchSubscriptionUrl(url, sub, settings, requestUserAgent)),
     getRequestConcurrency(settings),
     getRequestConcurrencyWait(settings),
   );
@@ -150,13 +151,13 @@ function splitSourceUrls(raw: string) {
     .filter((item) => /^https?:\/\//i.test(item));
 }
 
-async function fetchSubscriptionUrl(url: string, sub: SubscriptionSource, settings?: AppSettings) {
+async function fetchSubscriptionUrl(url: string, sub: SubscriptionSource, settings?: AppSettings, requestUserAgent?: string) {
   const controller = new AbortController();
   const timeout = getRequestTimeout(settings);
   const timeoutId = setTimeout(() => controller.abort(), timeout);
   try {
     const response = await fetch(url, {
-      headers: { "user-agent": getSourceUserAgent(sub, settings) },
+      headers: { "user-agent": getSourceUserAgent(sub, settings, requestUserAgent) },
       signal: controller.signal,
     });
     if (!response.ok) throw new Error(`Remote source ${sub.name} failed: ${response.status}`);
@@ -166,11 +167,14 @@ async function fetchSubscriptionUrl(url: string, sub: SubscriptionSource, settin
   }
 }
 
-function getSourceUserAgent(sub: SubscriptionSource, settings?: AppSettings) {
+function getSourceUserAgent(sub: SubscriptionSource, settings?: AppSettings, requestUserAgent?: string) {
+  const explicitUserAgent = stringSetting(sub.meta?.ua) || stringSetting(sub.meta?.userAgent);
+  if (explicitUserAgent) return explicitUserAgent;
+  if (sub.meta?.passThroughUA === true || sub.meta?.passThroughUA === "true") {
+    return stringSetting(requestUserAgent) || stringSetting(settings?.defaultUserAgent) || "clash.meta/v1.19.24";
+  }
   return (
-    stringSetting(sub.meta?.ua)
-    || stringSetting(sub.meta?.userAgent)
-    || stringSetting(settings?.defaultUserAgent)
+    stringSetting(settings?.defaultUserAgent)
     || "clash.meta/v1.19.24"
   );
 }

@@ -79,6 +79,7 @@ async function renderDownload(
       target: options.target,
       template,
       settings,
+      requestUserAgent: c.req.header("user-agent") || "",
     });
     return new Response(body, {
       headers: {

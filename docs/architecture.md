@@ -61,6 +61,8 @@ Cloudflare Worker
 
 这些参数只影响当前请求，不写入 D1。组合订阅会把临时输入应用到组合里第一个选中的订阅源，然后继续执行组合级过滤器和模板。
 
+远程订阅的 User-Agent 优先级是：订阅源自定义 `ua` / 临时 `ua` 参数 > 透传下载请求的 User-Agent > 全局默认 User-Agent。
+
 ## 输入与核心能力
 
 远程订阅只负责拉取 `http(s)` URL，多个 URL 可以按行填写并合并。本地订阅支持单行 URI、Mihomo YAML、JSON 代理数组和完整 Base64 内容。常用 URI 包括 `ss`、`ssr`、`vmess`、`vless`、`trojan`、`hysteria`、`hysteria2`、`tuic`、`anytls`、`http`、`socks5`、`wireguard`。
@@ -72,6 +74,7 @@ Cloudflare Worker
 - Mihomo 规则模板和自定义模板。
 - 原始/处理后节点预览，本地节点校验。
 - 下载链接级临时输入和一次性格式转换。
+- 单订阅源自定义 User-Agent 和透传 User-Agent。
 - 订阅流量信息、配置备份与恢复。
 - Mihomo、sing-box、v2ray、URI、JSON 输出。
 
