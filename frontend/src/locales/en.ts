@@ -697,10 +697,71 @@ export default {
     },
     appearance: {
       title: "Appearance",
+      groups: {
+        list: "List",
+        links: "Links and shortcuts",
+        editor: "Editor"
+      },
       simpleMode: "Simple mode",
       simpleModeDesc: "Controls the display density of lists and editors.",
+      listView: {
+        title: "List view",
+        desc: "Default to one or two columns on wide screens.",
+        single: "Single column",
+        dual: "Dual column"
+      },
+      showIcon: "Show subscription icons",
+      showIconDesc: "Use the preview button instead of icons when disabled.",
+      defaultIcon: "Use default icon",
+      defaultIconDesc: "Use the default Sub-Store icon when no icon is set.",
+      simpleRefreshIcon: "Refresh button in simple mode",
+      simpleRefreshIconDesc: "Keep the usage refresh button in compact list cards.",
+      simpleShowRemark: "Show remarks in simple mode",
+      simpleShowRemarkDesc: "Keep remarks visible and searchable in compact cards.",
+      foldItemMenu: "Fold item actions",
+      foldItemMenuDesc: "Fold copy, preview, and related actions behind a more button.",
+      leftSwipeActions: "Left swipe actions",
+      leftSwipeActionsDesc: "Switch the side where swipe actions appear.",
+      subProgress: {
+        title: "Usage progress",
+        desc: "Controls how usage progress appears on subscription cards.",
+        hidden: "Hidden",
+        background: "Background bar"
+      },
+      displayPreviewInWebPage: "Preview links in the web app",
+      displayPreviewInWebPageDesc: "Open generated links through the built-in preview page.",
+      floatingAddButton: "Floating add button",
+      floatingAddButtonDesc: "Move the top add action to the lower-right corner.",
+      floatingRefreshButton: "Floating refresh button",
+      floatingRefreshButtonDesc: "Move the top refresh action to the lower-right corner.",
+      createItemPosition: {
+        title: "New item position",
+        desc: "Choose where new sources and collections are inserted.",
+        top: "Top",
+        bottom: "Bottom"
+      },
       wideScreenNarrowMode: "Narrow navigation on desktop",
-      wideScreenNarrowModeDesc: "Use mobile-style navigation on wide desktop screens."
+      wideScreenNarrowModeDesc: "Use mobile-style navigation on wide desktop screens.",
+      editorDisplayMode: {
+        expanded: "Expanded",
+        collapsed: "Collapsed",
+        hidden: "Hidden"
+      },
+      editorCommon: {
+        title: "Common editor options",
+        desc: "Controls the default state of the common editor options."
+      },
+      manualSubscriptions: {
+        title: "Manual subscriptions",
+        desc: "Controls the default state of the manual selection area in collections."
+      },
+      editorGrouping: {
+        title: "Editor grouping",
+        desc: "Group editor sections by display, content, and actions.",
+        editOnly: "Edit page only",
+        disabled: "Disabled",
+        always: "Always on"
+      }
     },
     btn: {
       cancel: "Cancel",

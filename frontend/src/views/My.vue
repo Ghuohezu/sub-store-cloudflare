@@ -117,19 +117,153 @@
         <h1>{{ t("myPage.appearance.title") }}</h1>
         <LanguageSwitcherButton />
       </div>
-      <div class="settings-row">
-        <div>
-          <p class="row-title">{{ t("myPage.appearance.simpleMode") }}</p>
-          <p class="row-desc">{{ t("myPage.appearance.simpleModeDesc") }}</p>
+      <div class="settings-group">
+        <p class="settings-group-title">{{ t("myPage.appearance.groups.list") }}</p>
+        <div class="settings-row">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.simpleMode") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.simpleModeDesc") }}</p>
+          </div>
+          <nut-switch v-model="simpleMode" @change="(value) => saveAppearancePatch({ isSimpleMode: value })" />
         </div>
-        <nut-switch v-model="simpleMode" @change="saveAppearance" />
+        <div class="settings-row settings-row--clickable" @click="showListViewModePicker = true">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.listView.title") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.listView.desc") }}</p>
+          </div>
+          <div class="settings-value">
+            <span>{{ listViewModeLabel }}</span>
+            <nut-icon name="right" />
+          </div>
+        </div>
+        <div class="settings-row">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.showIcon") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.showIconDesc") }}</p>
+          </div>
+          <nut-switch v-model="showIcon" @change="(value) => saveAppearancePatch({ isShowIcon: value })" />
+        </div>
+        <div class="settings-row">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.defaultIcon") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.defaultIconDesc") }}</p>
+          </div>
+          <nut-switch v-model="defaultIcon" @change="(value) => saveAppearancePatch({ isDefaultIcon: value })" />
+        </div>
+        <div class="settings-row">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.simpleRefreshIcon") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.simpleRefreshIconDesc") }}</p>
+          </div>
+          <nut-switch v-model="simpleRefreshIcon" @change="(value) => saveAppearancePatch({ isSimpleReicon: value })" />
+        </div>
+        <div class="settings-row">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.simpleShowRemark") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.simpleShowRemarkDesc") }}</p>
+          </div>
+          <nut-switch v-model="simpleShowRemark" @change="(value) => saveAppearancePatch({ isSimpleShowRemark: value })" />
+        </div>
+        <div class="settings-row">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.foldItemMenu") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.foldItemMenuDesc") }}</p>
+          </div>
+          <nut-switch v-model="foldItemMenu" @change="(value) => saveAppearancePatch({ isSubItemMenuFold: value })" />
+        </div>
+        <div class="settings-row">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.leftSwipeActions") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.leftSwipeActionsDesc") }}</p>
+          </div>
+          <nut-switch v-model="leftSwipeActions" @change="(value) => saveAppearancePatch({ isLeftRight: value })" />
+        </div>
+        <div class="settings-row settings-row--clickable" @click="showSubProgressPicker = true">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.subProgress.title") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.subProgress.desc") }}</p>
+          </div>
+          <div class="settings-value">
+            <span>{{ subProgressStyleLabel }}</span>
+            <nut-icon name="right" />
+          </div>
+        </div>
       </div>
-      <div class="settings-row">
-        <div>
-          <p class="row-title">{{ t("myPage.appearance.wideScreenNarrowMode") }}</p>
-          <p class="row-desc">{{ t("myPage.appearance.wideScreenNarrowModeDesc") }}</p>
+
+      <div class="settings-group">
+        <p class="settings-group-title">{{ t("myPage.appearance.groups.links") }}</p>
+        <div class="settings-row">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.displayPreviewInWebPage") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.displayPreviewInWebPageDesc") }}</p>
+          </div>
+          <nut-switch v-model="displayPreviewInWebPage" @change="(value) => saveAppearancePatch({ displayPreviewInWebPage: value })" />
         </div>
-        <nut-switch v-model="wideScreenNarrowMode" @change="saveAppearance" />
+        <div class="settings-row">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.floatingAddButton") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.floatingAddButtonDesc") }}</p>
+          </div>
+          <nut-switch v-model="floatingAddButton" @change="(value) => saveAppearancePatch({ showFloatingAddButton: value })" />
+        </div>
+        <div class="settings-row">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.floatingRefreshButton") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.floatingRefreshButtonDesc") }}</p>
+          </div>
+          <nut-switch v-model="floatingRefreshButton" @change="(value) => saveAppearancePatch({ showFloatingRefreshButton: value })" />
+        </div>
+        <div class="settings-row settings-row--clickable" @click="showCreateItemPositionPicker = true">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.createItemPosition.title") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.createItemPosition.desc") }}</p>
+          </div>
+          <div class="settings-value">
+            <span>{{ createItemPositionLabel }}</span>
+            <nut-icon name="right" />
+          </div>
+        </div>
+        <div class="settings-row">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.wideScreenNarrowMode") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.wideScreenNarrowModeDesc") }}</p>
+          </div>
+          <nut-switch v-model="wideScreenNarrowMode" @change="setWideScreenNarrowMode" />
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <p class="settings-group-title">{{ t("myPage.appearance.groups.editor") }}</p>
+        <div class="settings-row settings-row--clickable" @click="showEditorCommonDisplayModePicker = true">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.editorCommon.title") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.editorCommon.desc") }}</p>
+          </div>
+          <div class="settings-value">
+            <span>{{ editorCommonDisplayModeLabel }}</span>
+            <nut-icon name="right" />
+          </div>
+        </div>
+        <div class="settings-row settings-row--clickable" @click="showManualSubscriptionsDisplayModePicker = true">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.manualSubscriptions.title") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.manualSubscriptions.desc") }}</p>
+          </div>
+          <div class="settings-value">
+            <span>{{ manualSubscriptionsDisplayModeLabel }}</span>
+            <nut-icon name="right" />
+          </div>
+        </div>
+        <div class="settings-row settings-row--clickable" @click="showEditorGroupingModePicker = true">
+          <div>
+            <p class="row-title">{{ t("myPage.appearance.editorGrouping.title") }}</p>
+            <p class="row-desc">{{ t("myPage.appearance.editorGrouping.desc") }}</p>
+          </div>
+          <div class="settings-value">
+            <span>{{ editorGroupingModeLabel }}</span>
+            <nut-icon name="right" />
+          </div>
+        </div>
       </div>
     </section>
 
@@ -167,6 +301,60 @@
       :cancel-text="t('myPage.btn.cancel')"
       :ok-text="t('specificWord.confirm')"
       @confirm="handleTemplateTargetConfirm"
+    />
+    <DesktopPicker
+      v-model="listViewModeValue"
+      v-model:visible="showListViewModePicker"
+      :columns="listViewModeColumns"
+      :title="t('myPage.appearance.listView.title')"
+      :cancel-text="t('myPage.btn.cancel')"
+      :ok-text="t('specificWord.confirm')"
+      @confirm="handleListViewModeConfirm"
+    />
+    <DesktopPicker
+      v-model="subProgressStyleValue"
+      v-model:visible="showSubProgressPicker"
+      :columns="subProgressStyleColumns"
+      :title="t('myPage.appearance.subProgress.title')"
+      :cancel-text="t('myPage.btn.cancel')"
+      :ok-text="t('specificWord.confirm')"
+      @confirm="handleSubProgressStyleConfirm"
+    />
+    <DesktopPicker
+      v-model="createItemPositionValue"
+      v-model:visible="showCreateItemPositionPicker"
+      :columns="createItemPositionColumns"
+      :title="t('myPage.appearance.createItemPosition.title')"
+      :cancel-text="t('myPage.btn.cancel')"
+      :ok-text="t('specificWord.confirm')"
+      @confirm="handleCreateItemPositionConfirm"
+    />
+    <DesktopPicker
+      v-model="editorCommonDisplayModeValue"
+      v-model:visible="showEditorCommonDisplayModePicker"
+      :columns="editorCommonDisplayModeColumns"
+      :title="t('myPage.appearance.editorCommon.title')"
+      :cancel-text="t('myPage.btn.cancel')"
+      :ok-text="t('specificWord.confirm')"
+      @confirm="handleEditorCommonDisplayModeConfirm"
+    />
+    <DesktopPicker
+      v-model="manualSubscriptionsDisplayModeValue"
+      v-model:visible="showManualSubscriptionsDisplayModePicker"
+      :columns="manualSubscriptionsDisplayModeColumns"
+      :title="t('myPage.appearance.manualSubscriptions.title')"
+      :cancel-text="t('myPage.btn.cancel')"
+      :ok-text="t('specificWord.confirm')"
+      @confirm="handleManualSubscriptionsDisplayModeConfirm"
+    />
+    <DesktopPicker
+      v-model="editorGroupingModeValue"
+      v-model:visible="showEditorGroupingModePicker"
+      :columns="editorGroupingModeColumns"
+      :title="t('myPage.appearance.editorGrouping.title')"
+      :cancel-text="t('myPage.btn.cancel')"
+      :ok-text="t('specificWord.confirm')"
+      @confirm="handleEditorGroupingModeConfirm"
     />
   </div>
 </template>
@@ -207,9 +395,30 @@ const templateImporting = ref(false);
 const templateImportVisible = ref(false);
 const templateEditingId = ref("");
 const templateTargetPickerVisible = ref(false);
+const showListViewModePicker = ref(false);
+const showSubProgressPicker = ref(false);
+const showCreateItemPositionPicker = ref(false);
+const showEditorCommonDisplayModePicker = ref(false);
+const showManualSubscriptionsDisplayModePicker = ref(false);
+const showEditorGroupingModePicker = ref(false);
 const templates = ref<any[]>([]);
 const simpleMode = ref(Boolean(appearanceSetting.value.isSimpleMode));
 const wideScreenNarrowMode = ref(Boolean(appearanceSetting.value.useNarrowModeOnWideScreen));
+const showIcon = ref(Boolean(appearanceSetting.value.isShowIcon ?? true));
+const defaultIcon = ref(Boolean(appearanceSetting.value.isDefaultIcon));
+const simpleRefreshIcon = ref(Boolean(appearanceSetting.value.isSimpleReicon));
+const simpleShowRemark = ref(Boolean(appearanceSetting.value.isSimpleShowRemark));
+const foldItemMenu = ref(Boolean(appearanceSetting.value.isSubItemMenuFold ?? true));
+const leftSwipeActions = ref(Boolean(appearanceSetting.value.isLeftRight));
+const displayPreviewInWebPage = ref(Boolean(appearanceSetting.value.displayPreviewInWebPage ?? true));
+const floatingAddButton = ref(Boolean(appearanceSetting.value.showFloatingAddButton));
+const floatingRefreshButton = ref(Boolean(appearanceSetting.value.showFloatingRefreshButton));
+const listViewModeValue = ref<ListPageViewMode[]>([appearanceSetting.value.listPageViewMode || "dual-column"]);
+const subProgressStyleValue = ref<string[]>([appearanceSetting.value.subProgressStyle || "hidden"]);
+const createItemPositionValue = ref<CreateItemPosition[]>([appearanceSetting.value.createItemPosition || "bottom"]);
+const editorCommonDisplayModeValue = ref<EditorCommonDisplayMode[]>([appearanceSetting.value.editorCommonDisplayMode || "collapsed"]);
+const manualSubscriptionsDisplayModeValue = ref<EditorSectionFoldMode[]>([appearanceSetting.value.manualSubscriptionsDisplayMode || "collapsed"]);
+const editorGroupingModeValue = ref<EditorGroupingMode[]>([appearanceSetting.value.editorGroupingMode || "edit-only"]);
 
 const requestForm = reactive({
   defaultUserAgent: "",
@@ -232,6 +441,51 @@ const templateTargetColumns = computed(() => {
 });
 const templateTargetLabel = computed(() => {
   return getTargetLabel(templateForm.target);
+});
+const listViewModeColumns = computed(() => [
+  { text: t("myPage.appearance.listView.single"), value: "single-column" },
+  { text: t("myPage.appearance.listView.dual"), value: "dual-column" },
+]);
+const subProgressStyleColumns = computed(() => [
+  { text: t("myPage.appearance.subProgress.hidden"), value: "hidden" },
+  { text: t("myPage.appearance.subProgress.background"), value: "background" },
+]);
+const createItemPositionColumns = computed(() => [
+  { text: t("myPage.appearance.createItemPosition.top"), value: "top" },
+  { text: t("myPage.appearance.createItemPosition.bottom"), value: "bottom" },
+]);
+const editorCommonDisplayModeColumns = computed(() => [
+  { text: t("myPage.appearance.editorDisplayMode.expanded"), value: "expanded" },
+  { text: t("myPage.appearance.editorDisplayMode.collapsed"), value: "collapsed" },
+  { text: t("myPage.appearance.editorDisplayMode.hidden"), value: "hidden" },
+]);
+const manualSubscriptionsDisplayModeColumns = computed(() => [
+  { text: t("myPage.appearance.editorDisplayMode.expanded"), value: "expanded" },
+  { text: t("myPage.appearance.editorDisplayMode.collapsed"), value: "collapsed" },
+]);
+const editorGroupingModeColumns = computed(() => [
+  { text: t("myPage.appearance.editorGrouping.editOnly"), value: "edit-only" },
+  { text: t("myPage.appearance.editorGrouping.disabled"), value: "disabled" },
+  { text: t("myPage.appearance.editorGrouping.always"), value: "always" },
+]);
+const listViewModeLabel = computed(() => {
+  return t(`myPage.appearance.listView.${listViewModeValue.value[0] === "single-column" ? "single" : "dual"}`);
+});
+const subProgressStyleLabel = computed(() => {
+  return t(`myPage.appearance.subProgress.${subProgressStyleValue.value[0] === "background" ? "background" : "hidden"}`);
+});
+const createItemPositionLabel = computed(() => {
+  return t(`myPage.appearance.createItemPosition.${createItemPositionValue.value[0] === "top" ? "top" : "bottom"}`);
+});
+const editorCommonDisplayModeLabel = computed(() => {
+  return t(`myPage.appearance.editorDisplayMode.${editorCommonDisplayModeValue.value[0] || "collapsed"}`);
+});
+const manualSubscriptionsDisplayModeLabel = computed(() => {
+  return t(`myPage.appearance.editorDisplayMode.${manualSubscriptionsDisplayModeValue.value[0] || "collapsed"}`);
+});
+const editorGroupingModeLabel = computed(() => {
+  const value = editorGroupingModeValue.value[0] || "edit-only";
+  return t(`myPage.appearance.editorGrouping.${value === "edit-only" ? "editOnly" : value}`);
 });
 const appName = computed(() => {
   return env.value?.app
@@ -257,6 +511,21 @@ watch(
   (next) => {
     simpleMode.value = Boolean(next.isSimpleMode);
     wideScreenNarrowMode.value = Boolean(next.useNarrowModeOnWideScreen);
+    showIcon.value = Boolean(next.isShowIcon ?? true);
+    defaultIcon.value = Boolean(next.isDefaultIcon);
+    simpleRefreshIcon.value = Boolean(next.isSimpleReicon);
+    simpleShowRemark.value = Boolean(next.isSimpleShowRemark);
+    foldItemMenu.value = Boolean(next.isSubItemMenuFold ?? true);
+    leftSwipeActions.value = Boolean(next.isLeftRight);
+    displayPreviewInWebPage.value = Boolean(next.displayPreviewInWebPage ?? true);
+    floatingAddButton.value = Boolean(next.showFloatingAddButton);
+    floatingRefreshButton.value = Boolean(next.showFloatingRefreshButton);
+    listViewModeValue.value = [next.listPageViewMode || "dual-column"];
+    subProgressStyleValue.value = [next.subProgressStyle || "hidden"];
+    createItemPositionValue.value = [next.createItemPosition || "bottom"];
+    editorCommonDisplayModeValue.value = [next.editorCommonDisplayMode || "collapsed"];
+    manualSubscriptionsDisplayModeValue.value = [next.manualSubscriptionsDisplayMode || "collapsed"];
+    editorGroupingModeValue.value = [next.editorGroupingMode || "edit-only"];
   },
   { deep: true },
 );
@@ -289,14 +558,69 @@ const saveRequestSettings = async () => {
   }
 };
 
-const saveAppearance = async () => {
+const saveAppearancePatch = async (patch: NonNullable<SettingsPostData["appearanceSetting"]>) => {
   await settingsStore.changeAppearanceSetting({
     appearanceSetting: {
       ...appearanceSetting.value,
-      isSimpleMode: simpleMode.value,
-      useNarrowModeOnWideScreen: wideScreenNarrowMode.value,
+      ...patch,
     },
   });
+};
+
+const setWideScreenNarrowMode = async (value: boolean) => {
+  const nextAppearanceSetting = {
+    ...appearanceSetting.value,
+    useNarrowModeOnWideScreen: value,
+  };
+
+  if (value && !nextAppearanceSetting.listPageViewModeInWideScreenNarrowMode) {
+    nextAppearanceSetting.listPageViewModeInWideScreenNarrowMode = nextAppearanceSetting.listPageViewMode || "dual-column";
+  }
+
+  await settingsStore.changeAppearanceSetting({ appearanceSetting: nextAppearanceSetting });
+};
+
+const handleListViewModeConfirm = ({ selectedValue }) => {
+  const value = selectedValue?.[0] === "single-column" ? "single-column" : "dual-column";
+  showListViewModePicker.value = false;
+  saveAppearancePatch({ listPageViewMode: value });
+};
+
+const handleSubProgressStyleConfirm = ({ selectedValue }) => {
+  const value = selectedValue?.[0] === "background" ? "background" : "hidden";
+  showSubProgressPicker.value = false;
+  saveAppearancePatch({ subProgressStyle: value });
+};
+
+const handleCreateItemPositionConfirm = ({ selectedValue }) => {
+  const value = selectedValue?.[0] === "top" ? "top" : "bottom";
+  showCreateItemPositionPicker.value = false;
+  saveAppearancePatch({ createItemPosition: value });
+};
+
+const handleEditorCommonDisplayModeConfirm = ({ selectedValue }) => {
+  const value = ["expanded", "collapsed", "hidden"].includes(selectedValue?.[0])
+    ? selectedValue[0]
+    : "collapsed";
+  showEditorCommonDisplayModePicker.value = false;
+  saveAppearancePatch({
+    editorCommonDisplayMode: value,
+    isEditorCommon: value !== "hidden",
+  });
+};
+
+const handleManualSubscriptionsDisplayModeConfirm = ({ selectedValue }) => {
+  const value = selectedValue?.[0] === "expanded" ? "expanded" : "collapsed";
+  showManualSubscriptionsDisplayModePicker.value = false;
+  saveAppearancePatch({ manualSubscriptionsDisplayMode: value });
+};
+
+const handleEditorGroupingModeConfirm = ({ selectedValue }) => {
+  const value = ["edit-only", "disabled", "always"].includes(selectedValue?.[0])
+    ? selectedValue[0]
+    : "edit-only";
+  showEditorGroupingModePicker.value = false;
+  saveAppearancePatch({ editorGroupingMode: value });
 };
 
 const selectBackupFile = () => {
@@ -666,6 +990,41 @@ onMounted(fetchTemplates);
 
   &:last-child {
     border-bottom: 0;
+  }
+}
+
+.settings-group {
+  border-bottom: 1px solid var(--divider-color);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.settings-group-title {
+  margin: 0;
+  padding: 12px 16px 6px;
+  font-size: 12px;
+  color: var(--comment-text-color);
+}
+
+.settings-row--clickable {
+  cursor: pointer;
+}
+
+.settings-value {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 46%;
+  color: var(--comment-text-color);
+  font-size: 12px;
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 

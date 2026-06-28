@@ -169,18 +169,18 @@ export const useSettingsStore = defineStore("settingsStore", {
       const editorGroupingMode = normalizeEditorGroupingMode(appearanceSetting);
 
       this.appearanceSetting.isSimpleMode = appearanceSetting?.isSimpleMode ?? true;
-      this.appearanceSetting.isLeftRight = appearanceSetting?.isLeftRight ?? "";
-      this.appearanceSetting.isDefaultIcon = appearanceSetting?.isDefaultIcon ?? "";
-      this.appearanceSetting.isIconColor = appearanceSetting?.isIconColor ?? "";
+      this.appearanceSetting.isLeftRight = appearanceSetting?.isLeftRight ?? false;
+      this.appearanceSetting.isDefaultIcon = appearanceSetting?.isDefaultIcon ?? false;
+      this.appearanceSetting.isIconColor = appearanceSetting?.isIconColor ?? false;
       this.appearanceSetting.isShowIcon = appearanceSetting?.isShowIcon ?? true;
-      this.appearanceSetting.isSimpleShowRemark = appearanceSetting?.isSimpleShowRemark ?? "";
+      this.appearanceSetting.isSimpleShowRemark = appearanceSetting?.isSimpleShowRemark ?? false;
       this.appearanceSetting.editorCommonDisplayMode = editorCommonDisplayMode;
       this.appearanceSetting.manualSubscriptionsDisplayMode = manualSubscriptionsDisplayMode;
       this.appearanceSetting.editorGroupingMode = editorGroupingMode;
       this.appearanceSetting.isEditorCommon = editorCommonDisplayMode !== "hidden";
-      this.appearanceSetting.isSimpleReicon = appearanceSetting?.isSimpleReicon ?? "";
+      this.appearanceSetting.isSimpleReicon = appearanceSetting?.isSimpleReicon ?? false;
       this.appearanceSetting.isSubItemMenuFold = appearanceSetting?.isSubItemMenuFold ?? true;
-      this.appearanceSetting.showFloatingRefreshButton = appearanceSetting?.showFloatingRefreshButton ?? "";
+      this.appearanceSetting.showFloatingRefreshButton = appearanceSetting?.showFloatingRefreshButton ?? false;
       this.appearanceSetting.showFloatingAddButton = appearanceSetting?.showFloatingAddButton ?? false;
       this.appearanceSetting.createItemPosition = appearanceSetting?.createItemPosition ?? "bottom";
       this.appearanceSetting.displayPreviewInWebPage = appearanceSetting?.displayPreviewInWebPage ?? true;
