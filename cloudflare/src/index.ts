@@ -61,12 +61,12 @@ export default {
       .filter(Boolean);
 
     if (publicDownloadHosts.includes(hostname) && !url.pathname.startsWith("/download/")) {
-      return new Response("Not Found", {
+      return applySecurityHeaders(new Response("Not Found", {
         status: 404,
         headers: {
           "cache-control": "no-store",
         },
-      });
+      }));
     }
 
     const response = await app.fetch(request, env, ctx);

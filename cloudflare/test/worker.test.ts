@@ -36,6 +36,14 @@ describe("Worker and D1 integration", () => {
     expect(getPath(await jsonObject(authorized), "status")).toBe("success");
   });
 
+  it("hardens the download-only host boundary", async () => {
+    const response = await workerExports.default.fetch(new Request("https://downloads.example.com/"));
+    expect(response.status).toBe(404);
+    expect(response.headers.get("cache-control")).toBe("no-store");
+    expect(response.headers.get("content-security-policy")).toContain("frame-ancestors 'none'");
+    expect(response.headers.get("permissions-policy")).toContain("camera=()");
+  });
+
   it("serves code-owned built-ins and restores custom storage in one request", async () => {
     const templatesResponse = await workerRequest("/api/templates");
     const initialTemplates = getPath(await jsonObject(templatesResponse), "data");

@@ -6,7 +6,6 @@ import i18n from '@/locales';
 import '@/plugin/awesomeIcon';
 
 import nutUi from '@/plugin/nutui';
-import router from '@/router';
 import '@/plugin/touch'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -19,8 +18,9 @@ import { syncAdminTokenFromUrl } from '@/utils/adminToken';
 
 import App from './App.vue';
 
-function initializeApp() {
+async function initializeApp() {
   syncAdminTokenFromUrl();
+  const { default: router } = await import('@/router');
 
   // 创建一个回调函数来处理变化
   const callback = function(mutationsList, observer) {
@@ -50,4 +50,4 @@ function initializeApp() {
   app.mount('#app');
 }
 
-initializeApp();
+void initializeApp();
