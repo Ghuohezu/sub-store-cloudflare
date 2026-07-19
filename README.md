@@ -14,7 +14,7 @@
 
 English: [README.en.md](README.en.md)
 
-## 最快部署：三步完成
+## 最快部署：三步完成  
 
 ### 1. 准备两个不同的随机 Token
 
